@@ -113,32 +113,32 @@ postprocessing=postproc,parameters=𝐹)
 # - generate animation using `myplot`
 # - single plot example using `myplot`
 
-#md p=dirname(pathof(IndividualDisplacements))
-#md include(joinpath(p,"../examples/recipes_plots.jl"));
-#md nt=length(𝐼.🔴.x)
+#src p=dirname(pathof(IndividualDisplacements))
+#src include(joinpath(p,"../examples/recipes_plots.jl"));
+#src nt=length(𝐼.🔴.x)
 
-#md myplot(i)=plot(𝐼.🔴.x[1:i],𝐼.🔴.y[1:i],𝐼.🔴.z[1:i],linewidth=2,arrow = 2,
-#md     title="Solid body rotation / Spiral example",leg=false,
-#md     xaxis="x",yaxis="y",zaxis="z",xlims=(0,np),ylims=(0,np));
+#src myplot(i)=plot(𝐼.🔴.x[1:i],𝐼.🔴.y[1:i],𝐼.🔴.z[1:i],linewidth=2,arrow = 2,
+#src     title="Solid body rotation / Spiral example",leg=false,
+#src     xaxis="x",yaxis="y",zaxis="z",xlims=(0,np),ylims=(0,np));
 
 #nb # %% {"slideshow": {"slide_type": "subslide"}}
 # Single plot example:
 
-#md plt=myplot(nt)
-#md scatter!(plt,[📌[1]],[📌[2]],[📌[3]])
-#md #scatter!(plt,[𝐼.🔴.x[end]],[𝐼.🔴.y[end]],[𝐼.🔴.z[end]])
-#md scatter!(plt,[𝐼.📌[1]],[𝐼.📌[2]],[𝐼.📌[3]])
+#src plt=myplot(nt)
+#src scatter!(plt,[📌[1]],[📌[2]],[📌[3]])
+#src #scatter!(plt,[𝐼.🔴.x[end]],[𝐼.🔴.y[end]],[𝐼.🔴.z[end]])
+#src scatter!(plt,[𝐼.📌[1]],[𝐼.📌[2]],[𝐼.📌[3]])
 
 #nb # %% {"slideshow": {"slide_type": "subslide"}}
 # Animation example:
 
-#md p=Int(ceil(nt/100))
-#md anim = @animate for i ∈ 1:p:nt
-#md     myplot(i)
-#md end
+#src p=Int(ceil(nt/100))
+#src anim = @animate for i ∈ 1:p:nt
+#src     myplot(i)
+#src end
 
-#md pth=tempdir()*"/"
-#md gif(anim, pth*"SolidBodyRotation.gif", fps = 15)
+#src pth=tempdir()*"/"
+#src gif(anim, pth*"SolidBodyRotation.gif", fps = 15)
 
 # Exercise: make the sinking velocity decrease with time 
 # (hint: it increases as specified above in the original notebook); 
