@@ -36,9 +36,9 @@ p=pages("basics"); np=length(p)
 i=findall((occursin).("solid_body_rotation",p)); 
 j=findall((occursin).("random_flow_field",p)); 
 p_tu=[p[j];p[i]]
-#i=findall((occursin).("detailed_look",p)); 
-#j=findall((occursin).("particle_cloud",p)); 
-#p_mi=[p[i];p[j]]
+i=findall((occursin).("detailed_look",p)); 
+j=findall((occursin).("particle_cloud",p)); 
+p_mi=[p[i];p[j]]
 
 makedocs(
     sitename = "IndividualDisplacements",
@@ -48,9 +48,9 @@ makedocs(
         "User Guide" => "workflow.md",
 		"Tool Box" => "API.md",
         "Example Guide" => "examples.md",
-        "Tutorial Examples" => p_tu], 
+        "Tutorial Examples" => p_tu, 
 		#"Real Ocean Cases" => pages("worldwide"),
-        #"MITgcm Examples" => p_mi], 
+        "MITgcm Examples" => p_mi], 
     modules = [IndividualDisplacements]
 )
 
