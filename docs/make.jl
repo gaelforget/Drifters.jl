@@ -2,8 +2,8 @@ using Documenter, Literate
 using IndividualDisplacements
 
 #download data dependencies if needed
-#IndividualDisplacements.get_ecco_velocity_if_needed();
-#IndividualDisplacements.get_occa_velocity_if_needed();
+IndividualDisplacements.get_ecco_velocity_if_needed();
+IndividualDisplacements.get_occa_velocity_if_needed();
 
 # generate tutorials and how-to guides using Literate
 src = joinpath(@__DIR__, "src/")
@@ -11,7 +11,7 @@ lit = joinpath(@__DIR__, "../examples/")
 notebooks = joinpath(src, "notebooks")
 
 execute = true # Set to true for executing notebooks and documenter!
-nb = false      # Set to true to generate the notebooks
+nb = true      # Set to true to generate the notebooks
 
 lst1 = ["solid_body_rotation"]
 #lst2 = ["solid_body_rotation","random_flow_field"]
