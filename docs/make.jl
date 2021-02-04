@@ -13,7 +13,7 @@ notebooks = joinpath(src, "notebooks")
 execute = true # Set to true for executing notebooks and documenter!
 nb = true      # Set to true to generate the notebooks
 
-lst1 = ["solid_body_rotation","random_flow_field","global_ocean_circulation","three_dimensional_ocean","detailed_look","particle_cloud"]
+lst1 = ["solid_body_rotation"]
 #lst2 = ["solid_body_rotation","random_flow_field"]
 lst2 = ["none"]
 tst1(x) = !isempty(lst1) && Bool(sum(isequal.(x, lst1)))
@@ -36,9 +36,9 @@ p=pages("basics"); np=length(p)
 i=findall((occursin).("solid_body_rotation",p)); 
 j=findall((occursin).("random_flow_field",p)); 
 p_tu=[p[j];p[i]]
-i=findall((occursin).("detailed_look",p)); 
-j=findall((occursin).("particle_cloud",p)); 
-p_mi=[p[i];p[j]]
+#i=findall((occursin).("detailed_look",p)); 
+#j=findall((occursin).("particle_cloud",p)); 
+#p_mi=[p[i];p[j]]
 
 makedocs(
     sitename = "IndividualDisplacements",
@@ -48,9 +48,9 @@ makedocs(
         "User Guide" => "workflow.md",
 		"Tool Box" => "API.md",
         "Example Guide" => "examples.md",
-        "Tutorial Examples" => p_tu, 
-		"Real Ocean Cases" => pages("worldwide"),
-        "MITgcm Examples" => p_mi], 
+        "Tutorial Examples" => p_tu], 
+		#"Real Ocean Cases" => pages("worldwide"),
+        #"MITgcm Examples" => p_mi], 
     modules = [IndividualDisplacements]
 )
 
