@@ -2,7 +2,7 @@ using Documenter, Literate, PlutoSliderServer
 using IndividualDisplacements, OceanStateEstimation
 
 #download data dependencies if needed
-IndividualDisplacements.flt_example_download()
+#IndividualDisplacements.flt_example_download()
 OceanStateEstimation.get_ecco_velocity_if_needed();
 OceanStateEstimation.get_occa_velocity_if_needed();
 
