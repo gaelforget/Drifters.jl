@@ -27,6 +27,8 @@ include(joinpath(p,"../examples/worldwide/OCCA_FlowFields.jl"))
 # ## 2.1 Ocean Circulation Setup
 #
 
+OceanStateEstimation.get_occa_velocity_if_needed();
+
 𝑃,𝐷=OCCA_FlowFields.setup(nmax=5);
 
 #nb # %% {"slideshow": {"slide_type": "subslide"}, "cell_type": "markdown"}
