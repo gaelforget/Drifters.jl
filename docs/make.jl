@@ -37,9 +37,7 @@ makedocs(
     format = Documenter.HTML(),
     pages = [
 		"Introduction" => "index.md",
-        "User Guide" => "workflow.md",
-        "Examples" => "examples.md", 
-		"Tool Box" => "API.md"],
+		],
         doctest = false,
     modules = [IndividualDisplacements]
 )
