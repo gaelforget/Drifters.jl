@@ -1,3 +1,6 @@
+using Pkg
+pkg.update()
+
 using Test, Documenter
 using IndividualDisplacements, OceanStateEstimation
 import IndividualDisplacements.MeshArrays as MeshArrays
