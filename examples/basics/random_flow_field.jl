@@ -91,8 +91,8 @@ begin
 
 	u=0.5*(circshift(uC, (1,0))+uC) /dx #staggered u converted to grid point units (m/s -> 1/s)
 	v=0.5*(circshift(vC, (0,1))+vC) /dx #staggered v converted to grid point units (m/s -> 1/s)
-	𝑇=(0.,1.)
-	𝐹=FlowFields(u,u,v,v,𝑇)
+	T=(0.,1.)
+	F=FlowFields(u,u,v,v,T)
 	"done with staggered flow field definition"
 end
 
@@ -107,7 +107,7 @@ begin
 	np,nq=size(u)
 	x=np*(0.6 .+ 0.1*rand(1000))
 	y=nq*(0.1 .+ 0.1*rand(1000))
-	𝐼=Individuals(𝐹,x,y)
+	𝐼=Individuals(F,x,y)
 end
 
 # ╔═╡ b1448b2e-5f2f-4ac7-8671-f3f9114179ce
@@ -116,14 +116,14 @@ x
 # ╔═╡ dffe1032-a247-4008-be22-692abcbe458a
 md"""## Compute Trajectories
 
-The time period is `𝐼.𝑃.𝑇` by default, unless `∫!(𝐼,𝑇)` is called instead as done below. 
+The time period is `𝐼.𝑃.T` by default, unless `∫!(𝐼,T)` is called instead as done below. 
 
 Note that the size of 🔴 is different from before -- this DataFrame is a record of the trajectories.
 """
 
 # ╔═╡ 28a3af5d-c1b3-4d95-8d06-034e1ad4f585
 begin
-	[∫!(𝐼,𝑇.+10*(n-1)) for n in 1:400]
+	[solve!(𝐼,T.+10*(n-1)) for n in 1:400]
 	𝐼
 end
 
@@ -196,7 +196,7 @@ md"""## Exercises
 - change the initial distribution of particles
 - increase the duration of the trajectories simulation
 - treat the non-periodic domain case by padding `u,v` with zeros 
-- make the flow field time variable `𝐹=FlowFields(-u,u,-v,v,(0.,10.))`
+- make the flow field time variable `F=FlowFields(-u,u,-v,v,(0.,10.))`
 - replace `u,v` with your own two-dimensional flow fields 
 """
 
@@ -206,8 +206,8 @@ md"""## Extras
 Instead of using the common `Array` type it can be advantageous to use [MeshArrays.jl](https://juliaclimate.github.io/MeshArrays.jl/dev/) which provides functionalities for staggered vector fields and gridded domain decomposition. The `convert_to_FlowFields` convenience function does the conversion for you. The only other difference from the `Array` case is the need to provide a vector of subdomain indices to `Individuals`. Here this is just a vector of ones since `convert_to_FlowFields` does not decompose the gridded domain.
 
 ```
-𝐹=convert_to_FlowFields(u,v,10.0)
-𝐼=Individuals(𝐹,x,y,fill(1,length(x)))
+F=convert_to_FlowFields(u,v,10.0)
+𝐼=Individuals(F,x,y,fill(1,length(x)))
 ```
 
 The `random_flow_field` function generates random flow fields that can be used instead of the analytical formulation used above. The "Rotational Component" option is most similar to what done in the original example.
