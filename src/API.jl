@@ -64,8 +64,8 @@ struct 𝐹_Array3D{T} <: FlowFields
 end
 
 """
-    FlowFields(; u::Union{Array,Tuple}=[], v::Union{Array,Tuple}=[], w::Union{Array,Tuple}=[], 
-    period::Union{Array,Tuple}=[], gridtype::Symbol=:centered)
+    FlowFields(;    u::Union{Array,Tuple}=[], v::Union{Array,Tuple}=[], w::Union{Array,Tuple}=[], 
+                    period::Union{Array,Tuple}=[], gridtype::Symbol=:centered)
 
 Construct FlowFields data structure based on keywords.
 
@@ -75,7 +75,7 @@ F=FlowFields(u=uC,v=vC,period=(0,10.))
 ```
 """
 function FlowFields(; u::Union{Array,Tuple}=[], v::Union{Array,Tuple}=[], w::Union{Array,Tuple}=[], 
-    period::Union{Array,Tuple}=[], gridtype::Symbol=:centered)
+    period::Union{Array,Tuple}=[], gridtype::Symbol=:centered, update_location!::Function=identity)
     (isa(u,Tuple)||length(u[:])==2) ? (u0=u[1]; u1=u[2]) : (u0=u; u1=u)
     (isa(v,Tuple)||length(v[:])==2) ? (v0=v[1]; v1=v[2]) : (v0=v; v1=v)
     (isa(w,Tuple)||length(w[:])==2) ? (w0=w[1]; w1=w[2]) : (w0=w; w1=w)
@@ -94,7 +94,11 @@ function FlowFields(; u::Union{Array,Tuple}=[], v::Union{Array,Tuple}=[], w::Uni
         end
     end
     if !isempty(u0) && !isempty(v0)
-        if !isempty(w0)
+        if !isempty(w0)&&isa(w0,AbstractMeshArray)
+            FlowFields(u0,u1,v0,v1,w0,w1,period,update_location!)
+        elseif isa(w0,AbstractMeshArray)
+            FlowFields(u0,u1,v0,v1,period,update_location!)
+        elseif !isempty(w0)
             FlowFields(u0,u1,v0,v1,w0,w1,period)
         else
             FlowFields(u0,u1,v0,v1,period)
