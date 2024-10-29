@@ -1,5 +1,6 @@
 using Test, Documenter
 using IndividualDisplacements, OceanStateEstimation, MeshArrays
+using MITgcm, NetCDF
 
 OceanStateEstimation.get_ecco_velocity_if_needed()
 OceanStateEstimation.get_occa_velocity_if_needed()
